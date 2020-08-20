@@ -54,8 +54,8 @@ endfunction
 
 command! -nargs=0 Compile :call Compile()
 
-map <C-c>c <ESC>:Compile<CR><CR><CR>:copen<CR>
-map <C-c>sc <ESC>:w<CR>:Compile<CR><CR><CR>:copen<CR>
+map <C-c>c <ESC>:w<CR>:Compile
+map <C-c>ca <ESC>:w<CR>:Compile<CR><CR><CR>:copen<CR>
 
 """"""""""""""""""""""""""""""""""""
 " Remap to make indentation faster "
