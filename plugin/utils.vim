@@ -94,10 +94,10 @@ function! Therenamer(word)
     exec "%s/" . a:word . "/" . s:replace . "/g"
 endfunction
 
-command! Renamer call feedkeys("\yiw :call Therenamer(\"\<C-r>\"\")")
+command! Renamer call feedkeys("\yiw :call Therenamer(\"\<C-r>\"\")\<CR>")
 
-nnoremap <leader>r :Renamer
-imap <C-r>r <Esc>:Renamer
+nnoremap <leader>r :Renamer<CR>
+imap <C-r>r <Esc>:Renamer<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " My implementation of hlnext of Damian Conway "
