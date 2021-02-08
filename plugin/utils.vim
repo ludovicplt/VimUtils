@@ -79,8 +79,38 @@ function! CleanExtraSpaces() "Function to clean unwanted spaces
     call setreg('/', old_query)
 endfun
 
-autocmd BufWritePre * :call CleanExtraSpaces()
-"call CleanExtraSpaces to remove unwanted spaces when saving
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Function to indent everything automatically "
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+function! IndentEverythingPreserve(command)
+    let search = @/
+    let cur_pos = getpos(".")
+    normal! H
+    let win_pos = getpos(".")
+    call setpos('.', cur_pos)
+    execute a:command
+    let @/ = search
+    call setpos('.', win_pos)
+    normal! zt
+    call setpos('.', cur_pos)
+endfunction
+
+function! IndentEverything()
+    call IndentEverythingPreserve('normal gg=G')
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Function to clean everything then indent all "
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! FormatAllCode()
+    call CleanExtraSpaces()
+    call IndentEverything()
+endfunction
+
+autocmd BufWritePre * :call FormatAllCode()
+" Format the code
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Function to have a change all occurences like "
